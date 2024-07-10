@@ -1,0 +1,56 @@
+<html lang="ita">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Francesca's Chic Shop</title>
+    
+    <!-- dedicati a SEO -->
+    <meta name="description" content="shop di abbigliamento alla moda">
+    <meta name="keywords" content="gonna, borsa, anello"> 
+</head>
+<body>
+    <h1>Francesca's Chic Shop</h1>
+    
+    <div id="productcontainer"></div>
+    
+    <script>
+        const productcontainer = document.getElementById("productcontainer");
+
+        // Recupero i prodotti da una chiamata API
+        fetch('https://fakestoreapi.com/products')
+            .then(res => res.json())
+            .then(json => {
+                const products = json;
+                products.forEach(product => {
+                    
+                    // Qui ho creato un div per il prodotto
+                    const productDiv = document.createElement('div');
+                    productDiv.className = 'product';
+
+                    // Qui ho creato e provato ad aggiungere l'immagine del prodotto
+                    const productImg = document.createElement('img');
+                    productImg.src = product.image;
+                    productImg.alt = product.title;
+                    productDiv.appendChild(productImg);
+
+                    // Qui ho creato e provato ad aggiungere il titolo del prodotto
+                    const productTitle = document.createElement('h2');
+                    productTitle.textContent = product.title;
+                    productDiv.appendChild(productTitle);
+
+                    // Qui ho creato e provato ad aggiungere la descrizione del prodotto
+                    const productDescription = document.createElement('p');
+                    productDescription.textContent = product.description;
+                    productDiv.appendChild(productDescription);
+
+                    // Qui ho creato e provato ad aggiungere il prezzo del prodotto
+                    const productPrice = document.createElement('p');
+                    productPrice.textContent = `€${product.price}`;
+                    productDiv.appendChild(productPrice);
+
+                    // Qui ho provato ad aggiungere il div del prodotto al container principale
+                    productcontainer.appendChild(productDiv);
+                });
+            })
+            .catch(error => console.error('Errore nel recupero dei prodotti:', error));
+    </script>
