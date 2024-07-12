@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ita">
 <head>
     <meta charset="UTF-8">
@@ -48,9 +49,20 @@
                     productPrice.textContent = `€${product.price}`;
                     productDiv.appendChild(productPrice);
 
+                    // Qui ho creato e provato ad aggiungere un bottone per salvare l'ID nel localStorage
+                    const saveButton = document.createElement('button');
+                    saveButton.textContent = 'Salva ID';
+                    saveButton.onclick = () => {
+                        localStorage.setItem('savedProductId', product.id);
+                        alert(`ID prodotto ${product.id} salvato!`);
+                    };
+                    productDiv.appendChild(saveButton);
+
                     // Qui ho provato ad aggiungere il div del prodotto al container principale
                     productcontainer.appendChild(productDiv);
                 });
             })
             .catch(error => console.error('Errore nel recupero dei prodotti:', error));
     </script>
+</body>
+</html>
